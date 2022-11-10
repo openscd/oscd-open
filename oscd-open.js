@@ -4,7 +4,6 @@ import { html as y } from './node_modules/lit-html/lit-html.js';
 import { LitElement as s } from './node_modules/lit-element/lit-element.js';
 import { query as i } from './node_modules/@lit/reactive-element/decorators/query.js';
 import './node_modules/@lit/reactive-element/decorators/query-assigned-elements.js';
-import './node_modules/@material/mwc-textfield/mwc-textfield.js';
 import { newOpenEvent } from './node_modules/@openscd/open-scd-core/foundation/open-event.js';
 
 class OscdOpen extends s {
@@ -23,8 +22,7 @@ class OscdOpen extends s {
         this.input.onchange = null;
     }
     render() {
-        return y `${y `<mwc-textfield label="open" value="some"></mwc-textfield>`
-            }
+        return y `
       <input
         @click=${({ target }) => {
             // eslint-disable-next-line no-param-reassign
@@ -32,7 +30,8 @@ class OscdOpen extends s {
         }}
         @change=${this.openDoc}
         type="file"
-      /> `;
+      />
+    `;
     }
 }
 __decorate([

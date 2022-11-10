@@ -1,5 +1,4 @@
 import { LitElement } from 'lit';
-import '@material/mwc-textfield';
 export default class OscdOpen extends LitElement {
     input: HTMLInputElement;
     run(): Promise<void>;
