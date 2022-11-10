@@ -1,28 +1,19 @@
+import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
-import merge from 'deepmerge';
-// use createSpaConfig for bundling a Single Page App
-// import { createSpaConfig } from '@open-wc/building-rollup';
 
-// use createBasicConfig to do regular JS to JS bundling
-import { createBasicConfig } from '@open-wc/building-rollup';
-
-const baseConfig = createBasicConfig({
-  // use the outputdir option to modify where files are output
-  // outputDir: 'dist',
-
-  // if you need to support older browsers, such as IE11, set the legacyBuild
-  // option to generate an additional build just for this browser
-  // legacyBuild: true,
-
-  // development mode creates a non-minified build for debugging or development
-  developmentMode: process.env.ROLLUP_WATCH === 'true',
-
-  // set to true to inject the service worker registration into your index.html
-  injectServiceWorker: false,
-});
-
-export default merge(baseConfig, {
+export default {
   input: './oscd-open.ts',
-  plugins: [typescript()],
-  output: { file: 'dist/oscd-open.js', sourcemap: true, dir: undefined },
-});
+  output: {
+    sourcemap: true,        // Add source map to build output
+    format:'es',            // ES module type export
+    dir: 'dist',            // The build output folder
+    preserveModules: true,  // Keep directory structure and files
+  },
+  preserveEntrySignatures: 'strict', // leaves export of the plugin entry point
+
+  plugins: [
+    /** Resolve bare module imports */
+    nodeResolve(),
+    typescript(),
+   ],
+};
